@@ -9,14 +9,56 @@
 </head>
 <body>
     <h1>etch your sketch here</h1>
-    <form>
-        <input type="number" placeholder="16" id="boardSize">
-        <button onclick="submitNumber()">go!</button>
-    </form>
-    <div id="board">
+    <div id="selectSizeUI">
+        <button id="-" onclick="lessCells()">-</button>
+        <h3 id="boardWidth">16</h3>
+        <button id="+" onclick="moreCells()">+</button>
+    </div>
+    <button id="generateBoard" onclick="generateBoard()">go!</button>
+    <div id="container">
+        <div id="board">
 
+        </div>
     </div>
     <script>
+        function moreCells() {
+            const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
+            const boardWidth = document.getElementById('boardWidth');
+            if (boardWidthValue >= 100) {
+                return; 
+            }
+            const newBoardWidth = boardWidthValue + 1;
+            boardWidth.textContent = newBoardWidth;
+        }
+
+        function lessCells() {
+            const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
+            const boardWidth = document.getElementById('boardWidth');
+            if (boardWidthValue <= 0) {
+                return;
+            }
+            const newBoardWidth = boardWidthValue - 1;
+            boardWidth.textContent = newBoardWidth;
+        }
+
+        function generateBoard() {
+            const board = document.getElementById('board');
+            board.innerHTML = '';
+            const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
+            boardSize = boardWidthValue ** 2
+            board.style.cssText = `grid-template-columns:repeat(${boardWidthValue}, 1fr); grid-template-rows:repeat(${boardWidthValue}, 1fr);`
+            for (let i = 0; i <= boardSize - 1; i++) {
+                createCell();
+            }
+            
+        }
+
+        function createCell() {
+            const board = document.getElementById('board');
+            const cell = document.createElement('div');
+            cell.classList.add('cell')
+            board.appendChild(cell);
+        }
 
     </script>  
 </body>
