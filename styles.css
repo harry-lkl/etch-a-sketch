@@ -43,3 +43,7 @@ h1 {
     border-color: grey;
     border-width: 0.1rem;
 }
+
+.painted {
+    background-color: black;
+}

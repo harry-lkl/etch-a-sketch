@@ -21,6 +21,8 @@
         </div>
     </div>
     <script>
+        generateBoard();
+
         function moreCells() {
             const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
             const boardWidth = document.getElementById('boardWidth');
@@ -50,6 +52,8 @@
             for (let i = 0; i <= boardSize - 1; i++) {
                 createCell();
             }
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => cell.addEventListener('mouseenter', paint => cell.classList.add('painted')));
             
         }
 
@@ -58,8 +62,7 @@
             const cell = document.createElement('div');
             cell.classList.add('cell')
             board.appendChild(cell);
-        }
-
+        }        
     </script>  
 </body>
 </html>
