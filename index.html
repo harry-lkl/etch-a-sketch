@@ -28,7 +28,7 @@
             const boardWidth = document.getElementById('boardWidth');
             const buttonText = document.getElementById('generateBoard');
             buttonText.textContent = `go!`
-            if (boardWidthValue >= 100) {
+            if (boardWidthValue >= 80) {
                 return; 
             }
             const newBoardWidth = boardWidthValue + 1;
@@ -47,10 +47,6 @@
             boardWidth.textContent = newBoardWidth;
         }
 
-        let mouseState = false;
-        document.body.addEventListener("mousedown", mouseDown => mouseState = true);
-        document.body.addEventListener("mouseup", mouseUp => mouseState = false);
-
         function generateBoard() {
             const board = document.getElementById('board');
             const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
@@ -62,8 +58,19 @@
             for (let i = 0; i <= boardSize - 1; i++) {
                 createCell();
             }
+            paint();
+        }
+
+        function paint() {
             const cells = document.querySelectorAll('.cell');
-            cells.forEach(cell => cell.addEventListener('mouseenter', paint => cell.classList.add('painted')));           
+            cells.forEach(cell => cell.addEventListener('mouseenter', function generateRGB() {
+                const rgbArr = [];
+                for (let i = 0; i <= 2; i++) {
+                    rgbArr.push(Math.floor(Math.random() * 256));
+                };
+                const rgbStr = `rgb(${rgbArr.join(',')})`;
+                cell.style.cssText = `background-color: ${rgbStr}`;
+            }))
         }
 
         function createCell() {
@@ -75,3 +82,5 @@
     </script>  
 </body>
 </html>
+
+// refactor paint funciton and generate rando color
