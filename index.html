@@ -14,7 +14,7 @@
         <h3 id="boardWidth">16</h3>
         <button id="+" onclick="moreCells()">+</button>
     </div>
-    <button id="generateBoard" onclick="generateBoard()">go!</button>
+    <button id="generateBoard" onclick="generateBoard()">clear</button>
     <div id="container">
         <div id="board">
 
@@ -26,6 +26,8 @@
         function moreCells() {
             const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
             const boardWidth = document.getElementById('boardWidth');
+            const buttonText = document.getElementById('generateBoard');
+            buttonText.textContent = `go!`
             if (boardWidthValue >= 100) {
                 return; 
             }
@@ -36,6 +38,8 @@
         function lessCells() {
             const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
             const boardWidth = document.getElementById('boardWidth');
+            const buttonText = document.getElementById('generateBoard');
+            buttonText.textContent = `go!`
             if (boardWidthValue <= 0) {
                 return;
             }
@@ -43,18 +47,23 @@
             boardWidth.textContent = newBoardWidth;
         }
 
+        let mouseState = false;
+        document.body.addEventListener("mousedown", mouseDown => mouseState = true);
+        document.body.addEventListener("mouseup", mouseUp => mouseState = false);
+
         function generateBoard() {
             const board = document.getElementById('board');
-            board.innerHTML = '';
             const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
-            boardSize = boardWidthValue ** 2
+            const boardSize = boardWidthValue ** 2
+            const buttonText = document.getElementById('generateBoard');
+            buttonText.textContent = `clear`
+            board.innerHTML = '';
             board.style.cssText = `grid-template-columns:repeat(${boardWidthValue}, 1fr); grid-template-rows:repeat(${boardWidthValue}, 1fr);`
             for (let i = 0; i <= boardSize - 1; i++) {
                 createCell();
             }
             const cells = document.querySelectorAll('.cell');
-            cells.forEach(cell => cell.addEventListener('mouseenter', paint => cell.classList.add('painted')));
-            
+            cells.forEach(cell => cell.addEventListener('mouseenter', paint => cell.classList.add('painted')));           
         }
 
         function createCell() {
