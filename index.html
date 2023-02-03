@@ -64,12 +64,16 @@
         function paint() {
             const cells = document.querySelectorAll('.cell');
             cells.forEach(cell => cell.addEventListener('mouseenter', function generateRGB() {
+                if (cell.classList.contains('painted')) {
+                    return;
+                }
                 const rgbArr = [];
                 for (let i = 0; i <= 2; i++) {
                     rgbArr.push(Math.floor(Math.random() * 256));
                 };
                 const rgbStr = `rgb(${rgbArr.join(',')})`;
                 cell.style.cssText = `background-color: ${rgbStr}`;
+                cell.classList.add('painted');
             }))
         }
 
