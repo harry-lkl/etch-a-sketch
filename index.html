@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>etch your sketch here</h1>
+    <h1>etch your sketch</h1>
     <div id="selectSizeUI">
         <button id="-" onclick="lessCells()">-</button>
         <h3 id="boardWidth">16</h3>
@@ -20,7 +20,9 @@
 
         </div>
     </div>
+    <button id="boardStyle" onclick="changeBoardStyle()">RGB mode</button>
     <script>
+        let boardStyle = 'RGB';
         generateBoard();
 
         function moreCells() {
@@ -47,6 +49,23 @@
             boardWidth.textContent = newBoardWidth;
         }
 
+        function changeBoardStyle() {
+            const boardStyleButton = document.getElementById('boardStyle');
+            if (boardStyle === 'RGB') {
+                boardStyle = 'BW';
+                boardStyleButton.textContent = `black and white mode`;
+            } else if (boardStyle === 'BW') {
+                boardStyle = 'rainbow';
+                boardStyleButton.textContent = `rainbow mode`;
+            } else if (boardStyle === 'rainbow') {
+                boardStyle = 'RGB';
+                boardStyleButton.textContent = `RGB mode`;
+            } else {
+                return 'how did you get here?';
+            }
+            generateBoard();
+        }
+
         function generateBoard() {
             const board = document.getElementById('board');
             const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
@@ -58,10 +77,18 @@
             for (let i = 0; i <= boardSize - 1; i++) {
                 createCell();
             }
-            paint();
+            if (boardStyle === 'RGB') {
+                paintRGB();
+            } else if (boardStyle === 'BW') {
+                paintBW();
+            } else if (boardStyle = 'rainbow') {
+                paintRainbow();
+            } else {
+                console.log('how did youget here?')
+            }
         }
 
-        function paint() {
+        function paintRGB() {
             const cells = document.querySelectorAll('.cell');
             cells.forEach(cell => cell.addEventListener('mouseenter', function generateRGB() {
                 if (cell.classList.contains('painted')) {
@@ -77,7 +104,41 @@
             }))
         }
 
-        function createCell() {
+        function paintBW() {
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => cell.addEventListener('mouseenter', function generateBW() {
+                if (cell.classList.contains('painted')) {
+                    return;
+                }
+                cell.style.cssText = `background-color: black`;
+                cell.classList.add('painted');
+            }))
+        }
+
+        function paintRainbow() {
+            let currentCount = 0;
+            let subCount = 0;
+            const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
+            const colorLength = Math.floor(Math. sqrt(boardWidthValue));
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => cell.addEventListener('mouseenter', function generateRainbow() {
+                if (cell.classList.contains('painted')) {
+                    return;
+                }
+                const rainbowArr = ['red','orange','yellow','green','blue','magenta','purple'];
+                if (subCount >= colorLength) {
+                    subCount = 0;
+                    currentCount++;
+                }
+                subCount++;              
+                const colorCode = (currentCount) % 7;
+                const color = rainbowArr[colorCode];                
+                cell.style.cssText = `background-color: ${color}`;
+                cell.classList.add('painted');
+            }))
+        }
+
+        function createCell() { 
             const board = document.getElementById('board');
             const cell = document.createElement('div');
             cell.classList.add('cell')
@@ -86,5 +147,3 @@
     </script>  
 </body>
 </html>
-
-// refactor paint funciton and generate rando color
