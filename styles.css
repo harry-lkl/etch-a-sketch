@@ -1,13 +1,69 @@
+:root {
+    --main-color: rgb(15, 15, 15);
+    --sub-color: rgb(50, 50, 50);
+    --grid-color: rgb(60,60,60);
+    --font-color: white;
+    --rgb: linear-gradient(to left, purple , pink, rgb(91, 255, 91), rgb(111, 169, 255));
+    --mono: linear-gradient(to left, white, white);
+    --rainbow: linear-gradient(to left, blue, green, orange, red);
+}
+
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--main-color);
 }
 
 h1 {
     text-align: center;
+    margin: 1rem 0;
+    color: var(--font-color);
+}
+
+button {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white;
+    background-color: var(--main-color);
     margin: 0;
+    border-color: white;
+}
+
+#plus, #minus {
+    height: 3rem;
+    width: 3rem;
+    font-size: 2rem;
+}
+
+#boardWidth {
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    margin: 0.5rem;
+}
+
+#selectSizeUI, #buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 17rem;
+    margin: 0;
+}
+
+#generateBoard, #boardStyle {
+    height: 3rem;
+    width: 8rem;
+}
+
+#boardStyle {
+    background-image: var(--rgb);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 #container {
@@ -16,19 +72,7 @@ h1 {
     width: 75vh;
     align-items: center;
     justify-content: center;
-    margin: 2rem;
-}
-
-#selectSizeUI {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-}
-
-#boardWidth {
-    width: 3rem;
-    text-align: center;
+    margin: 0.5rem;
 }
 
 #board {
@@ -38,12 +82,12 @@ h1 {
 }
 
 .cell {
-    background-color: white;
+    background-color: var(--sub-color);
     border-style: solid;
-    border-color: grey;
-    border-width: 0.1rem;
+    border-color: var(--grid-color);
+    border-width: 1px;
 }
 
 .painted {
-    background-color: black;
+    border-width: 0px;
 }

@@ -9,27 +9,29 @@
 </head>
 <body>
     <h1>etch your sketch</h1>
-    <div id="selectSizeUI">
-        <button id="-" onclick="lessCells()">-</button>
-        <h3 id="boardWidth">16</h3>
-        <button id="+" onclick="moreCells()">+</button>
-    </div>
-    <button id="generateBoard" onclick="generateBoard()">clear</button>
     <div id="container">
         <div id="board">
-
+            
         </div>
     </div>
-    <button id="boardStyle" onclick="changeBoardStyle()">RGB mode</button>
+    <div id="selectSizeUI">
+        <button id="minus" onclick="lessCells()">-</button>
+        <h3 id="boardWidth">40</h3>
+        <button id="plus" onclick="moreCells()">+</button>
+    </div>
+    <div id="buttons">
+        <button id="boardStyle" onclick="changeBoardStyle()">RGB</button>
+        <button id="generateBoard" onclick="generateBoard()">CLEAR</button>
+    </div>
     <script>
         let boardStyle = 'RGB';
         generateBoard();
-
+        
         function moreCells() {
             const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
             const boardWidth = document.getElementById('boardWidth');
             const buttonText = document.getElementById('generateBoard');
-            buttonText.textContent = `go!`
+            buttonText.textContent = `GO`
             if (boardWidthValue >= 80) {
                 return; 
             }
@@ -41,7 +43,7 @@
             const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
             const boardWidth = document.getElementById('boardWidth');
             const buttonText = document.getElementById('generateBoard');
-            buttonText.textContent = `go!`
+            buttonText.textContent = `GO`
             if (boardWidthValue <= 0) {
                 return;
             }
@@ -53,13 +55,16 @@
             const boardStyleButton = document.getElementById('boardStyle');
             if (boardStyle === 'RGB') {
                 boardStyle = 'BW';
-                boardStyleButton.textContent = `black and white mode`;
+                boardStyleButton.textContent = `MONO`;
+                boardStyleButton.style.cssText = `background-image: var(--mono);`
             } else if (boardStyle === 'BW') {
                 boardStyle = 'rainbow';
-                boardStyleButton.textContent = `rainbow mode`;
+                boardStyleButton.textContent = `RNBW`;
+                boardStyleButton.style.cssText = `background-image: var(--rainbow);`
             } else if (boardStyle === 'rainbow') {
                 boardStyle = 'RGB';
-                boardStyleButton.textContent = `RGB mode`;
+                boardStyleButton.textContent = `RGB`;
+                boardStyleButton.style.cssText = `background-image: var(--rgb);`
             } else {
                 return 'how did you get here?';
             }
@@ -71,7 +76,7 @@
             const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
             const boardSize = boardWidthValue ** 2
             const buttonText = document.getElementById('generateBoard');
-            buttonText.textContent = `clear`
+            buttonText.textContent = `CLEAR`
             board.innerHTML = '';
             board.style.cssText = `grid-template-columns:repeat(${boardWidthValue}, 1fr); grid-template-rows:repeat(${boardWidthValue}, 1fr);`
             for (let i = 0; i <= boardSize - 1; i++) {
@@ -110,7 +115,7 @@
                 if (cell.classList.contains('painted')) {
                     return;
                 }
-                cell.style.cssText = `background-color: black`;
+                cell.style.cssText = `background-color: white`;
                 cell.classList.add('painted');
             }))
         }
