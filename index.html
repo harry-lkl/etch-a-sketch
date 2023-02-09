@@ -31,6 +31,7 @@
     </div>
     <script>
         let boardStyle = 'RGB';
+        const maxWidth = 60;
         generateBoard();
         
         function moreCells() {
@@ -38,7 +39,7 @@
             const boardWidth = document.getElementById('boardWidth');
             const buttonText = document.getElementById('generateBoard');
             buttonText.textContent = `GO`
-            if (boardWidthValue >= 80) {
+            if (boardWidthValue >= maxWidth) {
                 return; 
             }
             const newBoardWidth = boardWidthValue + 1;
@@ -60,9 +61,9 @@
         document.getElementById("boardWidth").onmouseup = () => changeCells();
 
         function changeCells() {
-            let resolution =  prompt("Please enter resolution (1-100)", "40");
+            let resolution =  prompt(`Please enter resolution (1-${maxWidth})`, "40");
             let parsedResolution = parseFloat(resolution);
-            if (isNaN(parsedResolution) || parsedResolution < 1 || parsedResolution > 100) {
+            if (isNaN(parsedResolution) || parsedResolution < 1 || parsedResolution > maxWidth) {
                 changeCells();
                 return;
             }
