@@ -57,6 +57,22 @@
             boardWidth.textContent = newBoardWidth;
         }
 
+        document.getElementById("boardWidth").onmouseup = () => changeCells();
+
+        function changeCells() {
+            let resolution =  prompt("Please enter resolution (1-100)", "40");
+            let parsedResolution = parseFloat(resolution);
+            if (isNaN(parsedResolution) || parsedResolution < 1 || parsedResolution > 100) {
+                changeCells();
+                return;
+            }
+            const boardWidthValue = parseInt(document.getElementById('boardWidth').textContent);
+            const boardWidth = document.getElementById('boardWidth');
+            const buttonText = document.getElementById('generateBoard');
+            boardWidth.textContent = resolution;
+            generateBoard();
+        }
+
         function changeBoardStyle() {
             const boardStyleButton = document.getElementById('boardStyle');
             if (boardStyle === 'RGB') {
