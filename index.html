@@ -8,20 +8,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>etch your sketch</h1>
+    <h1>Etch-A-Sketch!</h1>
     <div id="container">
         <div id="board">
             
         </div>
     </div>
-    <div id="selectSizeUI">
-        <button id="minus" onclick="lessCells()">-</button>
-        <h3 id="boardWidth">40</h3>
-        <button id="plus" onclick="moreCells()">+</button>
-    </div>
-    <div id="buttons">
-        <button id="boardStyle" onclick="changeBoardStyle()">RGB</button>
-        <button id="generateBoard" onclick="generateBoard()">CLEAR</button>
+    <div>
+        <div id="selectSizeUI">
+            <button id="minus" onclick="lessCells()">-</button>
+            <h3 id="boardWidth">40</h3>
+            <button id="plus" onclick="moreCells()">+</button>
+        </div>
+        <div id="buttons">
+            <div id="UI">
+                <button id="boardStyle" onclick="changeBoardStyle()">RGB</button>
+            </div>
+            <div id="UI">
+                <button id="generateBoard" onclick="generateBoard()">CLEAR</button>
+            </div>
+        </div>
     </div>
     <script>
         let boardStyle = 'RGB';

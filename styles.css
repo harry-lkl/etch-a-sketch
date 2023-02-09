@@ -3,7 +3,7 @@
     --sub-color: rgb(50, 50, 50);
     --grid-color: rgb(60,60,60);
     --font-color: white;
-    --rgb: linear-gradient(to left, purple , pink, rgb(91, 255, 91), rgb(111, 169, 255));
+    --rgb: linear-gradient(to left, white, purple , pink, rgb(91, 255, 91), rgb(35, 120, 249), white);
     --mono: linear-gradient(to left, white, white);
     --rainbow: linear-gradient(to left, blue, green, orange, red);
 }
@@ -17,9 +17,11 @@ body {
 }
 
 h1 {
+    font-size: 2.7rem;
     text-align: center;
     margin: 1rem 0;
     color: var(--font-color);
+    text-shadow: 0 0 0.3rem white;
 }
 
 button {
@@ -29,7 +31,13 @@ button {
     color: white;
     background-color: var(--main-color);
     margin: 0;
+    border: none;
+}
+
+#UI {
+    border-style: solid;
     border-color: white;
+    border-width: 0.1rem;
 }
 
 #plus, #minus {
