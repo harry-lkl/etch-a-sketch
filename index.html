@@ -62,6 +62,9 @@
 
         function changeCells() {
             let resolution =  prompt(`Please enter resolution (1-${maxWidth})`, "40");
+            if (resolution === null) {
+                return;
+            }
             let parsedResolution = parseFloat(resolution);
             if (isNaN(parsedResolution) || parsedResolution < 1 || parsedResolution > maxWidth) {
                 changeCells();
